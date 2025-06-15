@@ -171,14 +171,15 @@ int main(int argc, char **argv) {
 		rkipc_audio_init();
 	rkipc_server_init();
 	rk_storage_init();
-	pthread_create(&key_chk, NULL, wait_key_event, NULL);
+	// pthread_create(&key_chk, NULL, wait_key_event, NULL);
 
 	while (g_main_run_) {
 		usleep(1000 * 1000);
 	}
+	LOG_INFO("Out from loop\n");
 
 	// deinit
-	pthread_join(key_chk, NULL);
+	// pthread_join(key_chk, NULL);
 	rk_storage_deinit();
 	rkipc_server_deinit();
 	rk_system_deinit();

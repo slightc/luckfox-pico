@@ -127,9 +127,9 @@ post_chk() {
 	fi
 
 	if [ -d "/oem/usr/share/iqfiles" ]; then
-		rkipc -a /oem/usr/share/iqfiles &
+		sleep 5 && rkipc -a /oem/usr/share/iqfiles &
 	else
-		rkipc &
+		sleep 5 && rkipc &
 	fi
 }
 

@@ -645,9 +645,13 @@ static void *rkipc_ivs_get_results(void *arg) {
 }
 
 int rkipc_rtmp_init() {
+	LOG_INFO("Start init RTMP");
 	int ret = 0;
-	ret |= rk_rtmp_init(0, RTMP_URL_0);
-	ret |= rk_rtmp_init(1, RTMP_URL_1);
+	char *rtmp_url = rk_param_get_string("video.source:rtmp_url", RTMP_URL_0);
+	ret |= rk_rtmp_init(0, rtmp_url);
+	LOG_INFO("rtmp_url:%s init state:%d\n", rtmp_url, ret);
+
+	// ret |= rk_rtmp_init(1, RTMP_URL_1);
 	// ret |= rk_rtmp_init(2, RTMP_URL_2);
 
 	return ret;
@@ -2301,7 +2305,7 @@ int rk_video_set_RC_mode(int stream_id, const char *value) {
 int rk_video_get_output_data_type(int stream_id, const char **value) {
 	char entry[128] = {'\0'};
 	snprintf(entry, 127, "video.%d:output_data_type", stream_id);
-	*value = rk_param_get_string(entry, "H.265");
+	*value = rk_param_get_string(entry, "H.264");
 
 	return 0;
 }
