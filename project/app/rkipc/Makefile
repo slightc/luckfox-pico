@@ -102,7 +102,7 @@ endif
 all: $(PKG_TARGET)
 	@echo "build $(PKG_NAME) done"
 
-rkipc-build: rkfsmk-build thirdlibs-build
+rkipc-build: rkfsmk-build thirdlibs-build mqtt-build
 	@echo "RK_APP_CHIP is $(RK_APP_CHIP)"
 	@echo "RK_APP_TYPE is $(RK_APP_TYPE)"
 	rm -rf $(PKG_BIN) $(PKG_BUILD); \
@@ -128,6 +128,9 @@ thirdlibs-build:
 
 rkfsmk-build:
 	@test ! -d $(RK_APP_COMPONENT)/rkfsmk || make -C $(RK_APP_COMPONENT)/rkfsmk
+
+mqtt-build:
+	@test ! -d $(RK_APP_COMPONENT)/mqtt || make -C $(RK_APP_COMPONENT)/mqtt
 
 clean:
 	@rm -rf $(PKG_BIN) $(PKG_BUILD)
